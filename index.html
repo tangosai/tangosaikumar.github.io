@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link href="img/favicon.jpg" rel="icon">
+    <title>Sai Kumar - UI and UX Designer</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/plugins.css">
+    <!-- style -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<script>
+    function initComparisons() {
+        var x, i;
+        /*find all elements with an "overlay" class:*/
+        x = document.getElementsByClassName("img-comp-overlay");
+        for (i = 0; i < x.length; i++) {
+            /*once for each "overlay" element:
+            pass the "overlay" element as a parameter when executing the compareImages function:*/
+            compareImages(x[i]);
+        }
+
+        function compareImages(img) {
+            var slider, img, clicked = 0,
+                w, h;
+            /*get the width and height of the img element*/
+            w = img.offsetWidth;
+            h = img.offsetHeight;
+            /*set the width of the img element to 50%:*/
+            img.style.width = (w / 2) + "px";
+            /*create slider:*/
+            slider = document.createElement("DIV");
+            slider.setAttribute("class", "img-comp-slider");
+            /*insert slider*/
+            img.parentElement.insertBefore(slider, img);
+            /*position the slider in the middle:*/
+            slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+            slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+            /*execute a function when the mouse button is pressed:*/
+            slider.addEventListener("mousedown", slideReady);
+            /*and another function when the mouse button is released:*/
+            window.addEventListener("mouseup", slideFinish);
+            /*or touched (for touch screens:*/
+            slider.addEventListener("touchstart", slideReady);
+            /*and released (for touch screens:*/
+            window.addEventListener("touchend", slideFinish);
+
+            function slideReady(e) {
+                /*prevent any other actions that may occur when moving over the image:*/
+                e.preventDefault();
+                /*the slider is now clicked and ready to move:*/
+                clicked = 1;
+                /*execute a function when the slider is moved:*/
+                window.addEventListener("mousemove", slideMove);
+                window.addEventListener("touchmove", slideMove);
+            }
+
+            function slideFinish() {
+                /*the slider is no longer clicked:*/
+                clicked = 0;
+            }
+
+            function slideMove(e) {
+                var pos;
+                /*if the slider is no longer clicked, exit this function:*/
+                if (clicked == 0) return false;
+                /*get the cursor's x position:*/
+                pos = getCursorPos(e)
+                /*prevent the slider from being positioned outside the image:*/
+                if (pos < 0) pos = 0;
+                if (pos > w) pos = w;
+                /*execute a function that will resize the overlay image according to the cursor:*/
+                slide(pos);
+            }
+
+            function getCursorPos(e) {
+                var a, x = 0;
+                e = e || window.event;
+                /*get the x positions of the image:*/
+                a = img.getBoundingClientRect();
+                /*calculate the cursor's x coordinate, relative to the image:*/
+                x = e.pageX - a.left;
+                /*consider any page scrolling:*/
+                x = x - window.pageXOffset;
+                return x;
+            }
+
+            function slide(x) {
+                /*resize the image:*/
+                img.style.width = x + "px";
+                /*position the slider:*/
+                slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+            }
+        }
+    }
+
+</script>
+
+<body>
+
+
+
+    <div class="overlay">
+
+        <div class="line"></div>
+        <div class="backscreen one"></div>
+        <div class="backscreen two"></div>
+    </div>
+
+
+
+    <div id="wrapper">
+
+
+
+
+
+        <!-- header starts -->
+        <header class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="logo-menu">
+                            <div class="logo">
+                                <a href="index.html"><img src="img/logo.jpg" alt=""></a>
+                            </div>
+                            <!--
+                        <div class="menu-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <button class="sa-burger">
+                            <span class="burger-text" style="transform: matrix(1, 0, 0, 1, 0, 0);">Menu</span>
+                            <svg id="burger-svg" class="burger-icon" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <rect class="burger-svg__base" width="50" height="50" fill="#02111B"></rect>
+                                <g class="burger-svg__bars" fill="#dced31">
+                                    <rect class="burger-svg__bar burger-svg__bar-1" x="14" y="18" width="22" height="2" data-svg-origin="25 19" style="transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: 0px 0px 0px;"></rect>
+                                    <rect class="burger-svg__bar burger-svg__bar-2" x="14" y="24" width="22" height="2" data-svg-origin="25 25" style="transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0); opacity: 1;"></rect>
+                                    <rect class="burger-svg__bar burger-svg__bar-3" x="14" y="30" width="22" height="2" data-svg-origin="25 31" style="transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: 0px 0px 0px;"></rect>
+                                </g>
+                            </svg>
+                        </button>
+-->
+                            <button class="sa-burger" id="burger-svg" onclick="haminate()">
+                                <span class="burger-text" style="transform: matrix(1, 0, 0, 1, 0, 0);">Menu</span>
+                                <svg class="burger-icon" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="50" height="50" fill="#02111B"></rect>
+                                    <g fill="#dced31">
+                                        <rect class="burger--svg-1" x="14" y="18" width="22" height="2"></rect>
+                                        <rect class="burger--svg-2" x="14" y="24" width="22" height="2"></rect>
+                                        <rect class="burger--svg-3" x="14" y="30" width="22" height="2"></rect>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        <!-- header ends -->
+
+
+
+
+
+        <main>
+
+            <!-- landing them start -->
+            <section class="landing-page">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="content">
+                                <h1>Sai Kumar Dontham</h1>
+                                <ul>
+                                    <li>Front End Developer</li>
+                                    <li> & </li>
+                                    <li>UI/UX Designer</li>
+                                </ul>
+                                <a href="#" class="sa-btn">Download CV</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="sa-img sa-img-animations">
+                    <div class="img"></div>
+                </div>
+            </section>
+            <!-- landing them ends -->
+
+            <!--
+            <section class="sa-about">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="sa-box bg-1">
+                                <div class="sa-icon bg_1">
+                                    <i class="fa fa-id-card"></i>
+                                </div>
+                                <h3>Feature-driven</h3>
+                                <p class="description">It’s also a cultural change, a shift in mindset where the whole company supports a new way of thinking.</p>
+                                <a href="#" class="btn_1">Read more</a>
+                            </div>
+                            <div class="sa-box bg-2">
+                                <div class="sa-icon bg_2">
+                                    <i class="fa fa-id-card"></i>
+                                </div>
+                                <h3>Feature-driven</h3>
+                                <p class="description">It’s also a cultural change, a shift in mindset where the whole company supports a new way of thinking.</p>
+                                <a href="#" class="btn_1">Read more</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="sa-box bg-3">
+                                <div class="sa-icon bg_3">
+                                    <i class="fa fa-id-card"></i>
+                                </div>
+                                <h3>Feature-driven</h3>
+                                <p class="description">It’s also a cultural change, a shift in mindset where the whole company supports a new way of thinking.</p>
+                                <a href="#" class="btn_1">Read more</a>
+                            </div>
+                            <div class="sa-box bg-4">
+                                <div class="sa-icon bg_4">
+                                    <i class="fa fa-id-card"></i>
+                                </div>
+                                <h3>Feature-driven</h3>
+                                <p class="description">It’s also a cultural change, a shift in mindset where the whole company supports a new way of thinking.</p>
+                                <a href="#" class="btn_1">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+-->
+            <!-- about us starts -->
+            <section class="sa-about">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="heading">About Me</h1>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="content">
+                                <h2>Hello! <br>I'M <b><span class="type"></span></b></h2>
+                                <p>I'm deeply passionate about creating clean, modern identities, stylish & beautiful website. And I can also handle web developing. I'm constantly improving and developing my skills, solving abilities and I like to set goals and will try hard to pursue them.</p>
+                                <p>I strives to build immersive and beautiful web applications through carefully crafted code and user-centric design.</p>
+                                <div class="buttons">
+                                    <a href="#" class="sa-btn">More About Me</a>
+                                    <a href="#" class="sa-btn mr-20">Contact Me</a>
+                                </div>
+                                <div class="sa-social">
+                                    <ul>
+                                        <li><a href="https://www.facebook.com/dsaikumar.web" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="https://www.instagram.com/dontham_sai_kumar/" target="_blank" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="https://github.com/tangosai/" target="_blank" class="github"><i class="fa fa-github"></i></a></li>
+                                        <li><a href="https://www.linkedin.com/in/sai-kumar-dontham-96a8b6186/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="sa-img">
+                                <img src="img/about.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- about us ends -->
+
+            <!-- wire frame starts -->
+            <section class="sa-wire">
+                <div class="contianer">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <!--                            <h1 class="heading">From wireframes – to code</h1>-->
+                            <h1 class="heading">Working Process..</h1>
+                            <div class="content">
+                                <h2>From wireframes – to code</h2>
+                                <p>Built it from ground up to give you an amazing experience</p>
+                            </div>
+                            <div class="img-box">
+                                <div class="img-comp-container">
+                                    <div class="img-comp-img">
+                                        <img src="img/code.jpg" class="re-img">
+                                    </div>
+                                    <div class="img-comp-img img-comp-overlay">
+                                        <img src="img/wire-frame.jpg" class="re-img">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- wire frame ends -->
+
+            <!-- my projects starts -->
+            <section class="sa-projects">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#">
+                                <div class="sa-cards">
+                                    <div class="img"> <img src="img/img_1.png" alt=""></div>
+                                    <div class="title">
+                                        <h3>Finance Ireland</h3>
+                                        <h4>Website, Advertising, <br> Digital</h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <a href="#">
+                                <div class="sa-cards">
+                                    <div class="img"> <img src="img/img_1.png" alt=""></div>
+                                    <div class="title">
+                                        <h3>Finance Ireland</h3>
+                                        <h4>Website, Advertising, <br> Digital</h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <a href="#">
+                                <div class="sa-cards">
+                                    <div class="img"> <img src="img/img_1.png" alt=""></div>
+                                    <div class="title">
+                                        <h3>Finance Ireland</h3>
+                                        <h4>Website, Advertising, <br> Digital</h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <a href="#">
+                                <div class="sa-cards">
+                                    <div class="img"> <img src="img/img_1.png" alt=""></div>
+                                    <div class="title">
+                                        <h3>Finance Ireland</h3>
+                                        <h4>Website, Advertising, <br> Digital</h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+            <!-- my projects ends -->
+
+            <!--  client feedback starts-->
+            <section class="sa-client">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="heading">Client Feedback...</h1>
+                        </div>
+                        <!--
+                        <div class="col-md-6">
+                            <div class="client-carousel-item">
+                                <img alt="" class="client-img" src="img/client.jpg">
+                                <div class="client-box">
+                                    <img alt="" class="image-quote" src="img/icon.png">
+                                    <div class="client-title">
+                                        <span class="client-name">Sai Ganapathi Polytechnic College</span>
+                                        <span class="client-company">/ Principal</span>
+                                    </div>
+                                    <p class="client-description">Sri Surya Solutions is attentive, personable, and professional. Will and his team provide great support for my company's needs.</p>
+                                </div>
+                            </div>
+                        </div>
+-->
+                    </div>
+                </div>
+                <div class="padding-50">
+                    
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+
+                            <!-- Slider main container -->
+                            <div class="swiper-container">
+                                <!-- Additional required wrapper -->
+                                <div class="swiper-wrapper">
+                                    <!-- Slides -->
+                                    <div class="swiper-slide">
+                                        <div class="client-carousel-item">
+                                            <img alt="" class="client-img" src="img/client.jpg">
+                                            <div class="client-box">
+                                                <img alt="" class="image-quote" src="img/icon.png">
+                                                <div class="client-title">
+                                                    <span class="client-name">Sai Ganapathi Polytechnic College</span>
+                                                    <span class="client-company">/ Principal</span>
+                                                </div>
+                                                <p class="client-description">“I could not thank you enough for creating a prefect website design for us. You deliver on time despite our last minute request for changes. Very patient and easy to deal with. The best!”</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="swiper-slide">
+                                        <div class="client-carousel-item">
+                                            <img alt="" class="client-img" src="img/client.jpg">
+                                            <div class="client-box">
+                                                <img alt="" class="image-quote" src="img/icon.png">
+                                                <div class="client-title">
+                                                    <span class="client-name">Sai Ganapathi Polytechnic College</span>
+                                                    <span class="client-company">/ Principal</span>
+                                                </div>
+                                                <p class="client-description">Sri Surya Solutions is attentive, personable, and professional. Will and his team provide great support for my company's needs.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <div class="client-carousel-item">
+                                            <img alt="" class="client-img" src="img/client.jpg">
+                                            <div class="client-box">
+                                                <img alt="" class="image-quote" src="img/icon.png">
+                                                <div class="client-title">
+                                                    <span class="client-name">Sai Ganapathi Polytechnic College</span>
+                                                    <span class="client-company">/ Principal</span>
+                                                </div>
+                                                <p class="client-description">Sri Surya Solutions is attentive, personable, and professional. Will and his team provide great support for my company's needs.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="swiper-slide">
+                                        <div class="client-carousel-item">
+                                            <img alt="" class="client-img" src="img/client.jpg">
+                                            <div class="client-box">
+                                                <img alt="" class="image-quote" src="img/icon.png">
+                                                <div class="client-title">
+                                                    <span class="client-name">Sai Ganapathi Polytechnic College</span>
+                                                    <span class="client-company">/ Principal</span>
+                                                </div>
+                                                <p class="client-description">Sri Surya Solutions is attentive, personable, and professional. Will and his team provide great support for my company's needs.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+<!--
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+-->
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+            </section>
+            <!--  client feedback ends-->
+
+            <br>
+        </main>
+
+
+    </div>
+    <!-- jquery -->
+    <script src="js/plugins.js"></script>
+    <!-- scroll trigger plugin -->
+    <script src="https://greensock.com/docs/Plugins/CSSRulePlugin"></script>
+    <!-- gsap 3 -->
+    <script src="js/gsap.min.js"></script>
+    <!-- main js -->
+    <script src="js/main.js"></script>
+    <!-- vanilla-tilt -->
+    <script src="js/vanilla-tilt.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.menu-icon').click(function() {
+                $('.menu-icon').toggleClass('active')
+                $('.menubar').toggleClass('active')
+            })
+        });
+
+    </script>
+    <!--
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".sa-box"), {
+            max: 25,
+            speed: 400
+        });
+
+    </script>
+-->
+    <script>
+        initComparisons();
+
+    </script>
+</body>
+
+</html>
