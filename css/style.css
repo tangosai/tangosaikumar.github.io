@@ -851,8 +851,22 @@ a:hover {
 
 @media only screen and (max-width: 600px) {
 
+
+
+
     #wrapper {
         padding: 0px;
+    }
+    .sa-btn{
+       padding: 7px 12px;
+    }
+    .landing-page .content h1 {
+        font-size: 35px;
+        margin-bottom: 0px;
+    }
+
+    .landing-page .content ul {
+        width: 100%;
     }
 
     .header {
@@ -886,5 +900,48 @@ a:hover {
 
     .sa-projects .sa-cards .title {
         padding: 10px;
+    }
+
+    .sa-about .content {
+        padding: 10px;
+    }
+
+    .sa-about .content h2 b {
+        font-size: 20px;
+    }
+    .sa-wire .content h2{
+        font-size: 24px;
+    }
+    .sa-about .content p{
+        font-size: 14px;
+    }
+}
+@media only screen and (max-width: 420px){
+    body{
+        font-size: 13px;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .landing-page .content ul {
+        margin-top: 0px;
+    }
+
+    .sa-about .content h2 b {
+        font-size: 18px;
+    }
+
+    .landing-page .content ul li {
+        display: inline-block;
+        position: relative;
+        margin: 0;
+        padding: 0 0px 0 0;
+        font-size: 14px;
+        color: #fff;
+        display: block;
+        text-transform: uppercase;
+    }
+
+    .landing-page .content h1 {
+        font-size: 30px;
     }
 }
