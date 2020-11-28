@@ -850,7 +850,7 @@ a:hover {
         height: 200px !important;
     }
 
-    .img-comp-img {
+    .sa-img-box{
         box-shadow: 0 50px 30px -40px rgba(0, 0, 0, 0.3);
         width: 320px !important;
     }
