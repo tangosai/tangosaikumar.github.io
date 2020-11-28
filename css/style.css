@@ -831,14 +831,7 @@ a:hover {
 }
 
 
-
-
-@media only screen and (max-width: 600px) {
-
-    #wrapper {
-        padding: 0px;
-    }
-
+@media only screen and (max-width: 900px) {
     .img-comp-container {
         position: relative;
         height: 200px;
@@ -850,9 +843,16 @@ a:hover {
         height: 200px !important;
     }
 
-    .sa-img-box{
+    .sa-img-box {
         box-shadow: 0 50px 30px -40px rgba(0, 0, 0, 0.3);
         width: 320px !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    #wrapper {
+        padding: 0px;
     }
 
     .header {
