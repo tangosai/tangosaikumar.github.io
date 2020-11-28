@@ -868,7 +868,9 @@ a:hover {
     .landing-page .content ul {
         width: 100%;
     }
-
+    .landing-page .content ul li{
+        display: block;
+    }
     .header {
         width: 100% !important;
         top: 0px;
